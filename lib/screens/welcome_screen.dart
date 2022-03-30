@@ -88,7 +88,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             RoundedButton(
               buttonTitle: 'Login',
               color: kColor1,
-              onTap: () {
+              onPressed: () {
                 //Go to registration screen.
                 Navigator.pushNamed(context, LoginScreen.id);
               },
@@ -96,7 +96,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             RoundedButton(
               buttonTitle: 'Register',
               color: kColor2,
-              onTap: () {
+              onPressed: () {
                 //Go to registration screen.
                 Navigator.pushNamed(context, RegistrationScreen.id);
               },

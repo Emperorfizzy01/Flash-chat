@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flash_chat/components/RoundedButton.dart';
 import 'package:flash_chat/constants.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class RegistrationScreen extends StatefulWidget {
   static const id = 'registration_screen';
@@ -9,6 +10,10 @@ class RegistrationScreen extends StatefulWidget {
 }
 
 class _RegistrationScreenState extends State<RegistrationScreen> {
+  final _auth = FirebaseAuth.instance;
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,18 +36,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               height: 48.0,
             ),
             TextField(
-                onChanged: (value) {
-                  //Do something with the user input.
-                },
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                controller: emailController,
+                style: TextStyle(color: Colors.black54),
                 decoration: kTextFieldDecoration.copyWith(
                     hintText: 'Enter your email')),
             SizedBox(
               height: 8.0,
             ),
             TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
+              obscureText: true,
+              textAlign: TextAlign.center,
+              controller: passwordController,
+              style: TextStyle(color: Colors.black54),
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password'),
             ),
@@ -52,9 +59,10 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
             RoundedButton(
               buttonTitle: 'Register',
               color: kColor2,
-              onTap: () {
+              onPressed: () {
                 //Go to registration screen.
-                Navigator.pushNamed(context, RegistrationScreen.id);
+                print(emailController.text);
+                print(passwordController.text);
               },
             ),
           ],

@@ -9,6 +9,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  TextEditingController emailController = new TextEditingController();
+  TextEditingController passwordController = new TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,18 +34,20 @@ class _LoginScreenState extends State<LoginScreen> {
               height: 48.0,
             ),
             TextField(
-                onChanged: (value) {
-                  //Do something with the user input.
-                },
+                keyboardType: TextInputType.emailAddress,
+                textAlign: TextAlign.center,
+                controller: emailController,
+                style: TextStyle(color: Colors.black54),
                 decoration: kTextFieldDecoration.copyWith(
                     hintText: 'Enter your email')),
             SizedBox(
               height: 8.0,
             ),
             TextField(
-              onChanged: (value) {
-                //Do something with the user input.
-              },
+              obscureText: true,
+              textAlign: TextAlign.center,
+              controller: passwordController,
+              style: TextStyle(color: Colors.black54),
               decoration: kTextFieldDecoration.copyWith(
                   hintText: 'Enter your password'),
             ),
@@ -52,7 +57,7 @@ class _LoginScreenState extends State<LoginScreen> {
             RoundedButton(
               buttonTitle: 'Login',
               color: kColor1,
-              onTap: () {
+              onPressed: () {
                 //Go to registration screen.
                 Navigator.pushNamed(context, LoginScreen.id);
               },

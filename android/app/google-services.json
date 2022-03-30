@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "55956685934",
+    "project_id": "flash-chat-2f0ba",
+    "storage_bucket": "flash-chat-2f0ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:55956685934:android:e906ed6f5803a83d53527f",
+        "android_client_info": {
+          "package_name": "co.emperorfizzy.flash_chat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "55956685934-1lluu10un15vetshlp5h8bhsqii2s08e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVAKPbdMzNu7Iebg4qaxt3oAna4_AQvkw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "55956685934-1lluu10un15vetshlp5h8bhsqii2s08e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
