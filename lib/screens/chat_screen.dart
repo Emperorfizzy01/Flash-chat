@@ -33,10 +33,24 @@ class _ChatScreenState extends State<ChatScreen> {
     }
   }
 
+  // void getMessages() async {
+  //   final messageTexts = await _fireStore.collection('messages').get();
+  //   for (var messagesText in messageTexts.docs) {
+  //     print(messagesText.data());
+  //   }
+  // }
+
+  void messageStreams() async {
+    await for (var snapshots in _fireStore.collection('messages').snapshots()) {
+      for (var messagesText in snapshots.docs) {
+        print(messagesText.data());
+      }
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: null,
         actions: <Widget>[
@@ -56,6 +70,32 @@ class _ChatScreenState extends State<ChatScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            StreamBuilder<QuerySnapshot>(
+                stream: _fireStore.collection('messages').snapshots(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Center(
+                      child: CircularProgressIndicator(
+                        backgroundColor: Colors.lightBlueAccent,
+                      ),
+                    );
+                  }
+                  final messages = snapshot.data.docs;
+                  List<Text> messagesWidget = [];
+                  for (var message in messages) {
+                    final messageText =
+                        (message.data() as Map<String, dynamic>)['text'];
+                    final messageSender =
+                        (message.data() as Map<String, dynamic>)['sender'];
+
+                    final messageWidget =
+                        Text('$messageText is from $messageSender');
+                    messagesWidget.add(messageWidget);
+                  }
+                  return Column(
+                    children: messagesWidget,
+                  );
+                }),
             Container(
               decoration: kMessageContainerDecoration,
               child: Row(
@@ -70,6 +110,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   FlatButton(
                     onPressed: () {
                       //Implement send functionality.
+                      // Must be the same with what you have in your firebase console
                       _fireStore.collection('messages').add({
                         'text': messages.text,
                         'sender': loggedInUser.email
